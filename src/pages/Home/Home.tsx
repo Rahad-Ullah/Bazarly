@@ -1,3 +1,4 @@
+import { CarouselPlugin } from "./CarouselSection/Carousel";
 import CategoriesSection from "./Categories/CategoriesSection";
 import FeaturedFacilities from "./FeaturedProducts/FeaturedProducts";
 
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       {/* banner section */}
       {/* <BannerSection /> */}
+      <CarouselPlugin />
       {/* categories */}
       <CategoriesSection />
       {/* featured facilities */}
