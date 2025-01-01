@@ -21,12 +21,16 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
+import { useCreateNewsletterMutation } from "@/redux/features/newsletter/newsletterApi";
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email" }),
 });
 
 const Footer = () => {
+  const [subscribe, { data }] = useCreateNewsletterMutation();
+
   const currentYear = new Date().getFullYear();
 
   // 1. form.
@@ -39,20 +43,20 @@ const Footer = () => {
 
   // 2. submit handler.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  async function onSubmit(_values: z.infer<typeof formSchema>) {
-    // toast.loading("Sending...", { id: "subscribe" });
-    // try {
-    //   const { data } = await createNewsletter(values);
-    //   if (data?.success) {
-    //     toast.success("Subscribed successfully", { id: "subscribe" });
-    //     form.reset();
-    //   } else {
-    //     toast.error("Something went wrong", { id: "subscribe" });
-    //   }
-    // } catch (error) {
-    //   toast.error("Something went wrong", { id: "subscribe" });
-    //   console.log(error);
-    // }
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    toast.loading("Sending...", { id: "subscribe" });
+    try {
+      await subscribe(values);
+      if (data?.success) {
+        toast.success("Subscribed successfully", { id: "subscribe" });
+        form.reset();
+      } else {
+        toast.error("Something went wrong", { id: "subscribe" });
+      }
+    } catch (error) {
+      toast.error("Something went wrong", { id: "subscribe" });
+      console.log(error);
+    }
   }
   return (
     <footer className="pt-16 lg:pt-24 bg-slate-900 text-white">
@@ -62,7 +66,7 @@ const Footer = () => {
             <h1 className="text-3xl font-extrabold">
               <span className="text-primary">Bazarly</span>
             </h1>
-            <p className="">To simplify your booking facility.</p>
+            <p className="">To simplify your shopping experience.</p>
 
             {/* app store links */}
             <div className="flex flex-col items-center md:items-start gap-3 my-4">
@@ -108,20 +112,56 @@ const Footer = () => {
               </Link>
             </div>
           </div>
-          {/* Quick links */}
+
+          {/* Category */}
           <ul className="space-y-1 text-neutral-300">
-            <li className="font-bold text-xl text-white py-1 mb-5">
-              Quick Links
-            </li>
+            <li className="font-bold text-xl text-white py-1 mb-5">Category</li>
             <li>
-              <Link to={"/"}>
+              <Link to={"/products?category=Mouse"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
                 >
-                  Home
+                  Mouse
                 </Button>
               </Link>
+            </li>
+            <li>
+              <Link to={"/products?category=Keyboard"}>
+                <Button
+                  variant={"ghost"}
+                  className="hover:bg-primary hover:text-white"
+                >
+                  Keyboard
+                </Button>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/products?category=Laptop"}>
+                <Button
+                  variant={"ghost"}
+                  className="hover:bg-primary hover:text-white"
+                >
+                  Laptop
+                </Button>
+              </Link>
+            </li>
+            <li>
+              <Link to={"/products?category=TV"}>
+                <Button
+                  variant={"ghost"}
+                  className="hover:bg-primary hover:text-white"
+                >
+                  TV
+                </Button>
+              </Link>
+            </li>
+          </ul>
+
+          {/* Quick links */}
+          <ul className="space-y-1 text-neutral-300">
+            <li className="font-bold text-xl text-white py-1 mb-5">
+              Quick Links
             </li>
             <li>
               <Link to={"/products"}>
@@ -134,17 +174,17 @@ const Footer = () => {
               </Link>
             </li>
             <li>
-              <Link to={"/management"}>
+              <Link to={"/shops"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
                 >
-                  Management
+                  Shops
                 </Button>
               </Link>
             </li>
             <li>
-              <Link to={""}>
+              <Link to={"about-us"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
@@ -153,12 +193,8 @@ const Footer = () => {
                 </Button>
               </Link>
             </li>
-          </ul>
-          {/* Support */}
-          <ul className="space-y-1 text-neutral-300">
-            <li className="font-bold text-xl text-white py-1 mb-5">Support</li>
             <li>
-              <Link to={"/"}>
+              <Link to={"/contact"}>
                 <Button
                   variant={"ghost"}
                   className="hover:bg-primary hover:text-white"
@@ -167,37 +203,9 @@ const Footer = () => {
                 </Button>
               </Link>
             </li>
-            <li>
-              <Link to={"/"}>
-                <Button
-                  variant={"ghost"}
-                  className="hover:bg-primary hover:text-white"
-                >
-                  FAQ
-                </Button>
-              </Link>
-            </li>
-            <li>
-              <Link to={"/"}>
-                <Button
-                  variant={"ghost"}
-                  className="hover:bg-primary hover:text-white"
-                >
-                  Privacy Policy
-                </Button>
-              </Link>
-            </li>
-            <li>
-              <Link to={""}>
-                <Button
-                  variant={"ghost"}
-                  className="hover:bg-primary hover:text-white"
-                >
-                  Terms & Conditions
-                </Button>
-              </Link>
-            </li>
           </ul>
+
+          {/* Contact Us */}
           <ul className="space-y-4 text-neutral-300">
             <li className="font-bold text-xl text-white py-1 mb-6">
               Contact Us
@@ -218,7 +226,7 @@ const Footer = () => {
               >
                 <Phone size={18} /> Phone:
               </span>{" "}
-              01712345678
+              +880 1234-567890
             </li>
             <li className="text-sm ">
               <span
@@ -231,10 +239,12 @@ const Footer = () => {
                 variant={"link"}
                 className="text-base text-neutral-300 hover:text-white p-0 h-6"
               >
-                sales@greenplanet.com
+                sales@bazarly.com
               </Button>
             </li>
           </ul>
+
+          {/* Newsletter */}
           <ul className="space-y-4">
             <li className="font-bold text-xl  py-1 mb-6">Newsletter</li>
             <Form {...form}>
