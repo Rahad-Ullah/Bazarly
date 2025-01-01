@@ -51,7 +51,7 @@ const FeaturedProducts = () => {
   // );
 
   return (
-    <div className="py-16 lg:py-24 bg-slate-50">
+    <div className="py-16 bg-slate-50">
       <Container>
         <div className="space-y-8 mb-12">
           {/* section header */}

@@ -66,7 +66,7 @@ const AddToCart = ({ product }: { product: IProduct }) => {
         variant={"secondary"}
         className="w-full gap-2 text-primary group-hover:bg-primary group-hover:text-white"
       >
-        <ShoppingCart size={20} /> Buy Now
+        <ShoppingCart size={20} /> Add To Cart
       </Button>
 
       <AlertDialog open={open} onOpenChange={setOpen}>

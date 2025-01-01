@@ -1,25 +1,22 @@
 import { CarouselPlugin } from "./CarouselSection/Carousel";
 import CategoriesSection from "./Categories/CategoriesSection";
 import FeaturedFacilities from "./FeaturedProducts/FeaturedProducts";
+import FlashSale from "./FlashSale/FlashSale";
 
 const Home = () => {
   return (
     <div>
-      {/* banner section */}
-      {/* <BannerSection /> */}
       <CarouselPlugin />
       {/* categories */}
       <CategoriesSection />
       {/* featured facilities */}
       <FeaturedFacilities />
-      {/* How it works */}
-      {/* <HowItWorksSection /> */}
+      {/* flash sale */}
+      <FlashSale />
       {/* Testimonial */}
       {/* <Testimonial /> */}
       {/* Our Partners */}
       {/* <PartnersSection /> */}
-      {/* Footer section */}
-      {/* <Footer /> */}
     </div>
   );
 };

@@ -14,13 +14,13 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   const { id, name, image, price, discount } = product;
 
   return (
-    <Card className="shadow-none hover:shadow-lg group">
+    <Card className="shadow-none hover:shadow-lg group flex flex-col justify-between">
       <Link to={`/products/${id}`}>
         <CardHeader className="pb-3">
           <img
             src={image}
             alt="product-image"
-            className="pb-2 object-cover w-full h-72 rounded-lg"
+            className="pb-2 object-cover w-full h-56 rounded-lg"
           />
           <CardTitle className="text-lg font-semibold text-zinc-900">
             {name}

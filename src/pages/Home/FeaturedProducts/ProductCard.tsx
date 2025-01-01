@@ -25,7 +25,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
   };
 
   return (
-    <Card className="border-none shadow-sm group flex flex-col justify-between">
+    <Card className="border-none shadow-sm hover:shadow-lg group flex flex-col justify-between">
       <Link to={`/products/${product?.id}`}>
         <CardHeader className="pb-3">
           <img
