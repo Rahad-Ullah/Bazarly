@@ -1,85 +1,85 @@
 import Container from "@/components/shared/Container";
+import SectionHeading from "@/components/shared/SectionHeader";
 
-const PartnersSection = () => {
+const BrandsSection = () => {
   return (
-    <div className="py-16 lg:py-24">
+    <div className="py-16 lg:py-20">
       <Container>
         <div>
           {/* section header */}
-          <h1 className="text-slate-900 text-3xl md:text-4xl font-extrabold mb-4 text-center">
-            Our Trusted Partners
-          </h1>
-          <p className="text-slate-600 text-lg md:text-xl font-medium text-center">
-            Together, we create exceptional sports opportunities ahead.
-          </p>
+          <SectionHeading
+            heading="Popular Brands"
+            subHeading="Discover the trusted names that bring you quality and style!"
+          />
+
           {/* logos container */}
           <div className="grid grid-cols-2 md:grid-cols-5 lg:grid-cols-5 gap-8 pt-12">
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Lotto_Sport_Italia/Lotto_Sport_Italia-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Samsung/Samsung-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Asics/Asics-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Lenovo_Vibe_K4_Note/Lenovo_Vibe_K4_Note-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Yonex/Yonex-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Apple_Inc./Apple_Inc.-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Wilson_Sporting_Goods/Wilson_Sporting_Goods-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/LG_Corporation/LG_Corporation-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Slazenger/Slazenger-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Sony/Sony-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Nike%2C_Inc./Nike%2C_Inc.-Nike-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/HP_Inc./HP_Inc.-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Fila_(company)/Fila_(company)-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Asus/Asus-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Puma_(brand)/Puma_(brand)-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Xiaomi_Mi_1/Xiaomi_Mi_1-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Adidas/Adidas-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Dell/Dell-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
             </div>
             <div>
               <img
-                src="https://www.logo.wine/a/logo/Gucci/Gucci-Logo.wine.svg"
+                src="https://www.logo.wine/a/logo/Nvidia/Nvidia-Logo.wine.svg"
                 alt="logo image"
                 className="grayscale hover:grayscale-0"
               />
@@ -91,4 +91,4 @@ const PartnersSection = () => {
   );
 };
 
-export default PartnersSection;
+export default BrandsSection;

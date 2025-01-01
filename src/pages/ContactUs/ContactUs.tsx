@@ -197,7 +197,7 @@ const ContactUs = () => {
               <h3 className="text-lg font-bold">Visit Our Office</h3>
               <p className="text-sm">Visit our office in real life.</p>
               <p className="mt-3 text-primary font-bold">
-                22/c Elementary Avenue, NY
+              1st floor, Islamic Tower, Golshan <br /> Dhaka-1200, Bangladesh.
               </p>
             </div>
             <div className="p-4">

@@ -1,7 +1,6 @@
 import Container from "@/components/shared/Container";
 import MissionSection from "./MissionSection";
 import OurTeamSection from "./OurTeamSection";
-import HistorySection from "./HistorySection";
 import ContactSection from "./ContactSection";
 
 const AboutUs = () => {
@@ -14,10 +13,10 @@ const AboutUs = () => {
             About Us
           </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-slate-900 pt-2 max-w-screen-lg">
-            GameSpaces is bringing sports facilities back to the future.
+            Bazarly is bringing shopping back to the future.
           </h1>
           <p className="font-medium md:text-lg">
-            Stop fighting your scheduling software. It's time to start loving
+            Buy everything you need. It's time to start loving
             it.
           </p>
         </div>
@@ -50,7 +49,7 @@ const AboutUs = () => {
         {/* our team section */}
         <OurTeamSection />
         {/* history and achievement section */}
-        <HistorySection />
+        {/* <HistorySection /> */}
         {/* contact section */}
         <ContactSection />
       </Container>

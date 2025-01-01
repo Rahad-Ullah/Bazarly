@@ -12,7 +12,7 @@ const ContactSection = () => {
         </h1>
         <p className="font-medium">
           Or just reach out manually to{" "}
-          <span className="text-primary">hello@gamespaces.com</span>
+          <span className="text-primary">sales@bazarly.com</span>
         </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -22,7 +22,7 @@ const ContactSection = () => {
           </span>
           <h3 className="text-lg font-bold">Email Support</h3>
           <p className="text-sm">Our team can respond in real time.</p>
-          <p className="mt-3 text-primary font-bold">hello@gamespaces.com</p>
+          <p className="mt-3 text-primary font-bold">sales@bazarly.com</p>
         </div>
         <div className="p-4">
           <span className="inline-flex p-2 mb-3 bg-indigo-50 rounded-full text-primary">
@@ -31,7 +31,7 @@ const ContactSection = () => {
           <h3 className="text-lg font-bold">Visit Our Office</h3>
           <p className="text-sm">Visit our office in real life.</p>
           <p className="mt-3 text-primary font-bold">
-            22/c Elementary Avenue, NY
+            1st floor, Islamic Tower, Golshan <br /> Dhaka-1200, Bangladesh.
           </p>
         </div>
         <div className="p-4">
@@ -40,7 +40,7 @@ const ContactSection = () => {
           </span>
           <h3 className="text-lg font-bold">Call Us Directly</h3>
           <p className="text-sm">Available during working hours.</p>
-          <p className="mt-3 text-primary font-bold">(+1)234-4567-789</p>
+          <p className="mt-3 text-primary font-bold">+880 1234-567890</p>
         </div>
       </div>
     </div>

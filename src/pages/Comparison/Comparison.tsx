@@ -118,7 +118,7 @@ const Comparison = () => {
           </section>
         )}
         {products.length < 1 && (
-          <section className="flex justify-center items-center mt-16">
+          <section className="flex justify-center items-center my-24">
             <div className="flex flex-col items-center gap-4 text-center">
               <h1 className="text-2xl font-extrabold text-zinc-500">Sorry!</h1>
               <h3 className="text-lg font-semibold">
