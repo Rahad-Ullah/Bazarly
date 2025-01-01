@@ -10,7 +10,6 @@ import {
 import { IProduct } from "@/types/TProduct";
 import {
   HandCoins,
-  Loader2,
   MinusIcon,
   PlusIcon,
   ShieldOff,
@@ -30,6 +29,7 @@ import { Rating } from "primereact/rating";
 import { useGetProductReviewQuery } from "@/redux/features/review/reviewApi";
 import { addToCart } from "@/redux/features/cart/cartSlice";
 import { ReviewDialogue } from "./ProductDetailsUtils/ReviewDialogue";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const ProductDetails = () => {
   const [quantity, setQuantity] = useState(1);
@@ -71,9 +71,24 @@ const ProductDetails = () => {
   return (
     <div>
       {isFetching ? (
-        <div className="flex justify-center items-center py-20">
-          <Loader2 className="animate-spin" />
-        </div>
+        <Container>
+          {/* skeleton for loading */}
+          <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-12">
+            <div className="w-full">
+              <Skeleton className="w-full md:w-64 lg:w-80 h-72" />
+            </div>
+            <div className="w-full space-y-4">
+              <Skeleton className="w-full h-12" />
+              <Skeleton className="w-48 h-6" />
+              <Skeleton className="w-32 h-6" />
+              <Skeleton className="w-48 h-12" />
+              <Skeleton className="w-60 h-16" />
+            </div>
+            <div className="w-full">
+              <Skeleton className="w-full max-w-xs h-80" />
+            </div>
+          </div>
+        </Container>
       ) : (
         <div>
           {/* product and delivery section */}
@@ -81,7 +96,7 @@ const ProductDetails = () => {
             <section className="flex flex-col lg:flex-row justify-between gap-10 my-12">
               <div className="flex flex-col md:flex-row gap-10">
                 {/* image */}
-                <div className="w-full max-w-sm">
+                <div className="w-full md:w-64 lg:w-80 max-w-sm">
                   <img
                     src={product?.image}
                     alt="product-image"
@@ -279,7 +294,7 @@ const ProductDetails = () => {
                 </div>
                 {/* related products */}
                 {relatedProducts?.length > 0 && (
-                  <div className="bg-white p-6 rounded-lg w-full lg:max-w-fit">
+                  <div className="bg-white p-6 rounded-lg w-full lg:max-w-[420px]">
                     <h1 className="text-xl font-semibold text-center text-primary pb-4">
                       Related Products
                     </h1>

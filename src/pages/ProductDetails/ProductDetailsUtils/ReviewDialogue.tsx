@@ -26,7 +26,7 @@ export function ReviewDialogue({ product }: { product: IProduct }) {
   const [comment, setComment] = useState("");
   const [createReview] = useCreateReviewMutation();
 
-  const { data } = useGetProductOrdersQuery(product.id);
+  const { data } = useGetProductOrdersQuery(product?.id);
   const orderData = data?.data;
 
   // verify that if user logged in
