@@ -30,6 +30,12 @@ import MyProducts from "@/pages/Dashboard/Vendor/MyProducts/MyProducts";
 import ShopReviews from "@/pages/Dashboard/Vendor/ShopReviews/ShopReviews";
 import ShopOrders from "@/pages/Dashboard/Vendor/ShopOrders/ShopOrders";
 import AllShops from "@/pages/AllShops/AllShops";
+import RecentViewed from "@/pages/Dashboard/Customer/RecentViewed/RecentViewed";
+import FollowedShops from "@/pages/Dashboard/Customer/FollowedShops/FollowedShops";
+import Vendors from "@/pages/Dashboard/Admin/Vendors/Vendors";
+import Shops from "@/pages/Dashboard/Admin/Shops/Shops";
+import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
+import Coupons from "@/pages/Dashboard/Admin/Coupons/Coupons";
 
 const router = createBrowserRouter([
   {
@@ -152,10 +158,18 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "customers",
+        path: "recent-viewed",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
-            <Customers />
+          <ProtectedRoutes role={userRole.CUSTOMER}>
+            <RecentViewed />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "my-followed-shops",
+        element: (
+          <ProtectedRoutes role={userRole.CUSTOMER}>
+            <FollowedShops />
           </ProtectedRoutes>
         ),
       },
@@ -191,22 +205,46 @@ const router = createBrowserRouter([
           </ProtectedRoutes>
         ),
       },
-      // {
-      //   path: "add-facility",
-      //   element: (
-      //     <ProtectedRoutes role="admin">
-      //       <AddFacility />
-      //     </ProtectedRoutes>
-      //   ),
-      // },
-      // {
-      //   path: "add-admin",
-      //   element: (
-      //     <ProtectedRoutes role="admin">
-      //       <AddAdmin />
-      //     </ProtectedRoutes>
-      //   ),
-      // },
+      {
+        path: "customers",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Customers />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "vendors",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Vendors />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "shops",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Shops />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "categories",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Categories />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "coupons",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Coupons />
+          </ProtectedRoutes>
+        ),
+      },
     ],
   },
 ]);

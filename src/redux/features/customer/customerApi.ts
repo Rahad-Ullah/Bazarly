@@ -1,5 +1,6 @@
 import generateQueryString from "@/utils/generateQueryString";
 import { baseApi } from "../../api/baseApi";
+import { ICustomerQueryParams } from "@/interfaces/queryParams";
 
 const customerApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -21,7 +22,7 @@ const customerApi = baseApi.injectEndpoints({
       invalidatesTags: ["Customers"],
     }),
     getAllCustomers: builder.query({
-      query: (query) => ({
+      query: (query: ICustomerQueryParams) => ({
         url: `/customers/?${generateQueryString(query)}`,
         method: "GET",
       }),

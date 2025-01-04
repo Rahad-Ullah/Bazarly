@@ -26,11 +26,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
-import {
-  useDeleteCustomerMutation,
-  useGetAllCustomersQuery,
-} from "@/redux/features/customer/customerApi";
-import { ICustomer } from "@/types/TCustomer";
 import { useState } from "react";
 import CustomPagination from "@/components/shared/Pagination";
 import { useChangeUserStatusMutation } from "@/redux/features/user/userApi";
@@ -38,52 +33,57 @@ import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
 import { Input } from "@/components/ui/input";
+import {
+  useDeleteVendorMutation,
+  useGetAllVendorsQuery,
+} from "@/redux/features/vendor/vendorApi";
+import { TVendor } from "@/types/TVendor";
 
-const Customers = () => {
+const Vendors = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  // get customers data
-  const { data, isFetching } = useGetAllCustomersQuery({
+  // get vendors data
+  const { data, isFetching } = useGetAllVendorsQuery({
     searchTerm: search,
     page,
   });
-  const customers = data?.data;
+  const vendors = data?.data;
   const pages = Math.ceil(data?.meta?.total / data?.meta?.limit);
 
-  // suspend user
-  const [suspendCustomer] = useChangeUserStatusMutation();
-  const handleSuspendCustomer = async (customer: ICustomer) => {
-    toast.loading("Pending...", { id: "Block_Customer" });
+  // block user
+  const [blockVendor] = useChangeUserStatusMutation();
+  const handleBlockVendor = async (vendor: TVendor) => {
+    toast.loading("Pending...", { id: "Block_Vendor" });
     try {
-      const res = await suspendCustomer({
-        id: customer.user.id,
+      const res = await blockVendor({
+        id: vendor.user.id,
         payload: {
-          status: customer.user.status === "ACTIVE" ? "BLOCKED" : "ACTIVE",
+          status: vendor.user.status === "ACTIVE" ? "BLOCKED" : "ACTIVE",
         },
       }).unwrap();
       if (res.success) {
-        toast.success("Successfully changed", { id: "Block_Customer" });
+        toast.success("Successfully changed", { id: "Block_Vendor" });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error?.data?.message, { id: "Block_Customer" });
+      toast.error(error?.data?.message, { id: "Block_Vendor" });
       console.log(error);
     }
   };
 
   // delete user
-  const [deleteCustomer] = useDeleteCustomerMutation();
-  const handleDeleteCustomer = async (customer: ICustomer) => {
-    toast.loading("Pending...", { id: "Delete_Customer" });
+  const [deleteVendor] = useDeleteVendorMutation();
+  const handleDeleteVendor = async (vendor: TVendor) => {
+    toast.loading("Pending...", { id: "Delete_Vendor" });
     try {
-      const res = await deleteCustomer(customer.id).unwrap();
+      const res = await deleteVendor(vendor.id).unwrap();
       if (res.success) {
-        toast.success("Successfully deleted", { id: "Delete_Customer" });
+        toast.success("Successfully deleted", { id: "Delete_Vendor" });
       }
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
-      toast.error(error?.data?.message, { id: "Delete_Customer" });
+      toast.error(error?.data?.message, { id: "Delete_Vendor" });
       console.log(error);
     }
   };
@@ -93,9 +93,9 @@ const Customers = () => {
       <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-8">
         <Card className="grid flex-1 h-full shadow-none">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">Customers</CardTitle>
+            <CardTitle className="text-2xl font-bold">Vendors</CardTitle>
             <CardDescription>
-              Manage customers and view their details.
+              Manage vendors and view their details.
             </CardDescription>
             <div className="pt-6">
               <Input
@@ -147,7 +147,7 @@ const Customers = () => {
                       </TableRow>
                     ))
                   : // display date when fetching completed
-                    customers?.map((item: ICustomer, index: number) => (
+                    vendors?.map((item: TVendor, index: number) => (
                       <TableRow key={index}>
                         <TableCell className="font-medium">
                           <img
@@ -167,10 +167,10 @@ const Customers = () => {
                           <Badge
                             variant={"outline"}
                             className={`rounded-full ${
-                              item.user.status === "BLOCKED" && "text-red-500"
+                              item.user?.status === "BLOCKED" && "text-red-500"
                             }`}
                           >
-                            {capitalizeFirstLetter(item.user.status)}
+                            {capitalizeFirstLetter(item.user?.status)}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -194,15 +194,15 @@ const Customers = () => {
                               {/* <OrderDetails order={item} /> */}
                               {/* cancel button */}
                               <DropdownMenuItem
-                                onClick={() => handleSuspendCustomer(item)}
+                                onClick={() => handleBlockVendor(item)}
                                 className="gap-1"
                               >
-                                {item.user.status === "ACTIVE"
+                                {item.user?.status === "ACTIVE"
                                   ? "Block"
                                   : "Unblock"}
                               </DropdownMenuItem>
                               <DropdownMenuItem
-                                onClick={() => handleDeleteCustomer(item)}
+                                onClick={() => handleDeleteVendor(item)}
                                 className="gap-1 text-red-500"
                               >
                                 Delete
@@ -213,7 +213,7 @@ const Customers = () => {
                       </TableRow>
                     ))}
               </TableBody>
-              {customers?.length < 1 && (
+              {vendors?.length < 1 && (
                 <TableCaption>
                   {/* show no data found message */}
                   <div className="text-center w-full mt-14">
@@ -232,22 +232,24 @@ const Customers = () => {
             </Table>
           </CardContent>
           {/* showing range of pagination */}
-          <CardFooter>
-            <CustomPagination
-              pages={pages}
-              page={page}
-              setPage={setPage}
-              align="start"
-            />
-            <div className="text-xs text-muted-foreground">
-              Showing <strong>1-{customers?.length}</strong> of{" "}
-              <strong>{customers?.length}</strong>
-            </div>
-          </CardFooter>
+          {vendors?.length < 1 && (
+            <CardFooter>
+              <CustomPagination
+                pages={pages}
+                page={page}
+                setPage={setPage}
+                align="start"
+              />
+              <div className="text-xs text-muted-foreground">
+                Showing <strong>1-{vendors?.length}</strong> of{" "}
+                <strong>{vendors?.length}</strong>
+              </div>
+            </CardFooter>
+          )}
         </Card>
       </main>
     </div>
   );
 };
 
-export default Customers;
+export default Vendors;

@@ -13,12 +13,13 @@ type props = {
   pages: number;
   page: number;
   setPage: (page: number) => void;
+  align?: string;
 };
 
-const CustomPagination = ({ pages, page, setPage }: props) => {
+const CustomPagination = ({ pages, page, setPage, align }: props) => {
   return (
-    <Pagination>
-      <PaginationContent>
+    <Pagination className={`md:justify-${align} flex-1`}>
+      <PaginationContent className="flex-wrap">
         <PaginationItem>
           <Button
             onClick={() => setPage(page - 1)}

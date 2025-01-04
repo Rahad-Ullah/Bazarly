@@ -76,8 +76,8 @@ const PaymentSuccess = () => {
             )}
             <Separator />
             <div className="mt-2">
-              <Link to={"/dashboard"}>
-                <Button className="md:text-base">Go to dashboard</Button>
+              <Link to={"/"}>
+                <Button className="md:text-base">Go Home</Button>
               </Link>
             </div>
           </div>

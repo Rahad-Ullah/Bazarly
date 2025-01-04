@@ -61,3 +61,21 @@ export interface IOrderQueryParams
   paymentStatus?: string;
   paymentType?: string;
 }
+
+export interface ICustomerQueryParams
+  extends Record<string, string | number | undefined> {
+  searchTerm?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
+export interface IVendorQueryParams
+  extends Record<string, string | number | undefined> {
+  searchTerm?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  sortOrder?: string;
+}

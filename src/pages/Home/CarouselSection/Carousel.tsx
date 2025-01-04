@@ -29,7 +29,7 @@ export function CarouselPlugin() {
         >
           <Card className="">
             <CardContent className="flex items-center justify-center p-0">
-              <Link to={"/flash-sale"} className="w-full">
+              <Link to={""} className="w-full">
                 <img
                   src={sliderImg1}
                   alt="slider"
@@ -49,7 +49,7 @@ export function CarouselPlugin() {
         >
           <Card className="">
             <CardContent className="flex items-center justify-center p-0">
-              <Link to={"/flash-sale"} className="w-full">
+              <Link to={""} className="w-full">
                 <img
                   src={sliderImg2}
                   alt="slider"

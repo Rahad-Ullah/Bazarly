@@ -32,27 +32,17 @@ import { Link } from "react-router-dom";
 import { useGetMyOrdersQuery } from "@/redux/features/order/orderApi";
 import { IOrder } from "@/types/TOrder";
 import OrderDetails from "./OrderDetailsDialogue";
+import CustomPagination from "@/components/shared/Pagination";
+import { useState } from "react";
 
 const MyOrders = () => {
+  const [page, setPage] = useState(1);
+
   // get orders data
   const { data, isFetching } = useGetMyOrdersQuery(undefined);
   const orders = data?.data?.data;
 
-  // cancel booking
-  //   const [cancelBooking] = useCancelBookingMutation();
-  //   const handleCancelBooking = async (id: string) => {
-  //     toast.loading("Canceling...", { id: "cancel" });
-  //     try {
-  //       const res = await cancelBooking(id).unwrap();
-  //       if (res.success) {
-  //         toast.success("Successfully Deleted", { id: "cancel" });
-  //       }
-  //       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  //     } catch (error: any) {
-  //       toast.error(error?.data?.message, { id: "cancel" });
-  //       console.log(error);
-  //     }
-  //   };
+  const pages = Math.ceil(data?.data?.meta?.total / data?.data?.meta?.limit);
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
@@ -200,10 +190,16 @@ const MyOrders = () => {
           </CardContent>
           {/* showing range of pagination */}
           {orders?.length > 0 && (
-            <CardFooter>
-              <div className="text-xs text-muted-foreground">
+            <CardFooter className="">
+              <CustomPagination
+                page={page}
+                setPage={setPage}
+                pages={pages}
+                align="start"
+              />
+              <div className="hidden md:block text-xs text-muted-foreground">
                 Showing <strong>1-{orders?.length}</strong> of{" "}
-                <strong>{orders?.length}</strong> orders
+                <strong>{orders?.length}</strong> items
               </div>
             </CardFooter>
           )}

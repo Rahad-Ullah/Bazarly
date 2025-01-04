@@ -1,4 +1,5 @@
 import {
+  History,
   Mails,
   Receipt,
   ShoppingCart,
@@ -88,13 +89,13 @@ export const CustomerSidebarMenus = [
     icon: <ShoppingCart size={20} />,
   },
   {
-    title: "My Reviews",
-    path: "/dashboard/my-reviews",
-    icon: <Star size={20} />,
-  },
-  {
     title: "Followed Shops",
     path: "/dashboard/my-followed-shops",
     icon: <Store size={20} />,
+  },
+  {
+    title: "Recent Viewed",
+    path: "/dashboard/recent-viewed",
+    icon: <History size={20} />,
   },
 ];
