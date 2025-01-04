@@ -36,6 +36,8 @@ import Vendors from "@/pages/Dashboard/Admin/Vendors/Vendors";
 import Shops from "@/pages/Dashboard/Admin/Shops/Shops";
 import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
 import Coupons from "@/pages/Dashboard/Admin/Coupons/Coupons";
+import Newsletters from "@/pages/Dashboard/Admin/Newsletters/Newsletters";
+import ShopFollowers from "@/pages/Dashboard/Vendor/ShopFollowers/ShopFollowers";
 
 const router = createBrowserRouter([
   {
@@ -206,6 +208,14 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path: "shop-followers",
+        element: (
+          <ProtectedRoutes role={userRole.VENDOR}>
+            <ShopFollowers />
+          </ProtectedRoutes>
+        ),
+      },
+      {
         path: "customers",
         element: (
           <ProtectedRoutes role={userRole.ADMIN}>
@@ -242,6 +252,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes role={userRole.ADMIN}>
             <Coupons />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "newsletters",
+        element: (
+          <ProtectedRoutes role={userRole.ADMIN}>
+            <Newsletters />
           </ProtectedRoutes>
         ),
       },

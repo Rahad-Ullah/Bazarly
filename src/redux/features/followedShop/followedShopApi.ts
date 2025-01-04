@@ -30,8 +30,8 @@ const followApi = baseApi.injectEndpoints({
       providesTags: ["Followers"],
     }),
     getShopFollowers: builder.query({
-      query: (shopId) => ({
-        url: `/followed-shops/followers/${shopId}`,
+      query: (vendorEmail) => ({
+        url: `/followed-shops/followers/${vendorEmail}`,
         method: "GET",
       }),
       providesTags: ["Followers"],

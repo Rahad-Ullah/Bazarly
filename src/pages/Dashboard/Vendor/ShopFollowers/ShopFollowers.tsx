@@ -11,7 +11,6 @@ import {
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -26,85 +25,34 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { MoreHorizontal } from "lucide-react";
+import { ICustomer } from "@/types/TCustomer";
 import { useState } from "react";
 import CustomPagination from "@/components/shared/Pagination";
-import { useChangeUserStatusMutation } from "@/redux/features/user/userApi";
-import { toast } from "sonner";
 import { Badge } from "@/components/ui/badge";
 import { capitalizeFirstLetter } from "@/utils/capitalizeFirstLetter";
-import { Input } from "@/components/ui/input";
-import {
-  useDeleteVendorMutation,
-  useGetAllVendorsQuery,
-} from "@/redux/features/vendor/vendorApi";
-import { TVendor } from "@/types/TVendor";
+import { useGetShopFollowersQuery } from "@/redux/features/followedShop/followedShopApi";
+import { useAppSelector } from "@/redux/hook";
+import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
 
-const Vendors = () => {
-  const [search, setSearch] = useState("");
+const ShopFollowers = () => {
   const [page, setPage] = useState(1);
 
-  // get vendors data
-  const { data, isFetching } = useGetAllVendorsQuery({
-    searchTerm: search,
-    page,
-  });
-  const vendors = data?.data;
-  const pages = Math.ceil(data?.meta?.total / data?.meta?.limit);
+  const user = useAppSelector(selectCurrentUser);
 
-  // block user
-  const [blockVendor] = useChangeUserStatusMutation();
-  const handleBlockVendor = async (vendor: TVendor) => {
-    toast.loading("Pending...", { id: "Block_Vendor" });
-    try {
-      const res = await blockVendor({
-        id: vendor.user.id,
-        payload: {
-          status: vendor.user.status === "ACTIVE" ? "BLOCKED" : "ACTIVE",
-        },
-      }).unwrap();
-      if (res.success) {
-        toast.success("Successfully changed", { id: "Block_Vendor" });
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.data?.message, { id: "Block_Vendor" });
-      console.log(error);
-    }
-  };
-
-  // delete user
-  const [deleteVendor] = useDeleteVendorMutation();
-  const handleDeleteVendor = async (vendor: TVendor) => {
-    toast.loading("Pending...", { id: "Delete_Vendor" });
-    try {
-      const res = await deleteVendor(vendor.id).unwrap();
-      if (res.success) {
-        toast.success("Successfully deleted", { id: "Delete_Vendor" });
-      }
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    } catch (error: any) {
-      toast.error(error?.data?.message, { id: "Delete_Vendor" });
-      console.log(error);
-    }
-  };
+  // get followers data
+  const { data, isFetching } = useGetShopFollowersQuery(user?.email);
+  const followers = data?.data?.data;
+  const pages = Math.ceil(data?.data?.meta?.total / data?.data?.meta?.limit);
 
   return (
     <div className="flex flex-1 flex-col gap-4 lg:gap-6">
       <main className="grid flex-1 items-start gap-4 sm:py-0 md:gap-8">
         <Card className="grid flex-1 h-full shadow-none">
           <CardHeader>
-            <CardTitle className="text-2xl font-bold">Vendors</CardTitle>
+            <CardTitle className="text-2xl font-bold">Followers</CardTitle>
             <CardDescription>
-              Manage vendors and view their details.
+              Manage followers and view their details.
             </CardDescription>
-            <div className="pt-6">
-              <Input
-                onChange={(e) => setSearch(e.target.value)}
-                type="search"
-                placeholder="Search by name, email or phone"
-                className="max-w-sm"
-              />
-            </div>
           </CardHeader>
           <CardContent>
             <Table className="border">
@@ -147,7 +95,7 @@ const Vendors = () => {
                       </TableRow>
                     ))
                   : // display date when fetching completed
-                    vendors?.map((item: TVendor, index: number) => (
+                    followers?.map((item: ICustomer, index: number) => (
                       <TableRow key={index}>
                         <TableCell className="font-medium">
                           <img
@@ -167,10 +115,10 @@ const Vendors = () => {
                           <Badge
                             variant={"outline"}
                             className={`rounded-full ${
-                              item.user?.status === "BLOCKED" && "text-red-500"
+                              item.user.status === "BLOCKED" && "text-red-500"
                             }`}
                           >
-                            {capitalizeFirstLetter(item.user?.status)}
+                            {capitalizeFirstLetter(item.user.status)}
                           </Badge>
                         </TableCell>
                         <TableCell>
@@ -190,27 +138,13 @@ const Vendors = () => {
                               className="space-y-1"
                             >
                               <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                              <DropdownMenuItem
-                                onClick={() => handleBlockVendor(item)}
-                                className="gap-1"
-                              >
-                                {item.user?.status === "ACTIVE"
-                                  ? "Block"
-                                  : "Unblock"}
-                              </DropdownMenuItem>
-                              <DropdownMenuItem
-                                onClick={() => handleDeleteVendor(item)}
-                                className="gap-1 text-red-500"
-                              >
-                                Delete
-                              </DropdownMenuItem>
                             </DropdownMenuContent>
                           </DropdownMenu>
                         </TableCell>
                       </TableRow>
                     ))}
               </TableBody>
-              {vendors?.length < 1 && (
+              {followers?.length < 1 && (
                 <TableCaption>
                   {/* show no data found message */}
                   <div className="text-center w-full mt-14">
@@ -229,24 +163,22 @@ const Vendors = () => {
             </Table>
           </CardContent>
           {/* showing range of pagination */}
-          {vendors?.length < 1 && (
-            <CardFooter>
-              <CustomPagination
-                pages={pages}
-                page={page}
-                setPage={setPage}
-                align="start"
-              />
-              <div className="text-xs text-muted-foreground">
-                Showing <strong>1-{vendors?.length}</strong> of{" "}
-                <strong>{vendors?.length}</strong>
-              </div>
-            </CardFooter>
-          )}
+          <CardFooter>
+            <CustomPagination
+              pages={pages}
+              page={page}
+              setPage={setPage}
+              align="start"
+            />
+            <div className="text-xs text-muted-foreground">
+              Showing <strong>1-{followers?.length}</strong> of{" "}
+              <strong>{followers?.length}</strong>
+            </div>
+          </CardFooter>
         </Card>
       </main>
     </div>
   );
 };
 
-export default Vendors;
+export default ShopFollowers;
