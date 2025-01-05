@@ -149,7 +149,7 @@ const ShopFollowers = () => {
                   {/* show no data found message */}
                   <div className="text-center w-full mt-14">
                     <h3 className="text-2xl font-bold tracking-tight">
-                      No customer found
+                      No follower found
                     </h3>
                     {/* <p className="text-sm text-muted-foreground">
                       You can start enjoying as soon as you order a product.
