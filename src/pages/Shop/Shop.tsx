@@ -43,6 +43,8 @@ const Shop = () => {
   const isFollow = followers?.find(
     (item: IFollowedShop) => item?.customer?.email === user?.email
   );
+  console.log(followesData);
+  console.log(isFollow);
 
   const [follow] = useFollowShopMutation();
   const [unFollow] = useUnFollowMutation();
