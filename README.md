@@ -58,7 +58,7 @@ https://bazarly-client.vercel.app
 - **Transaction Monitoring:** Oversee all transactions and booking activities.
 
 
-## Technology Stack
+## Technology Stacks
 
 ### Frontend
 
