@@ -30,6 +30,7 @@ const FollowedShops = () => {
   // get shops data
   const { data, isFetching } = useGetFollowedShopsQuery(undefined);
   const shops = data?.data?.map((item: { shop: IShop }) => item?.shop);
+  console.log(shops?.length < 1);
 
   const pages = 1;
 
@@ -81,15 +82,15 @@ const FollowedShops = () => {
                       <FollowedShopItem key={index} shop={item} />
                     ))}
               </TableBody>
-              {shops?.length < 1 && (
+              {!shops?.length && (
                 <TableCaption>
                   {/* show no data found message if bookings is empty */}
                   <div className="text-center w-full mt-14">
                     <h3 className="text-2xl font-bold tracking-tight">
-                      You have no shops
+                      No shop found yet
                     </h3>
                     <p className="text-sm text-muted-foreground">
-                      You can start enjoying as soon as you visit a shop.
+                      You can see your followed shops here if you follow a shop.
                     </p>
                     <Link to={"/shops"}>
                       <Button className="mt-4">Go Shops</Button>

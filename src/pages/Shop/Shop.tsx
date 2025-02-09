@@ -78,7 +78,8 @@ const Shop = () => {
       {!isFetching && (
         <Container>
           <div className="flex flex-col lg:flex-row gap-6">
-            <section className="bg-white rounded-lg p-6 w-full lg:max-w-xs h-fit">
+            {/* left section - shop info */}
+            <section className="bg-white border rounded-lg p-6 w-full lg:max-w-xs h-fit">
               <div className="space-y-3">
                 <img src={shop?.logoUrl} className="max-w-48 p-2" alt="logo" />
                 <h1 className="text-3xl font-bold">{shop?.name}</h1>
@@ -122,11 +123,13 @@ const Shop = () => {
                 <p className="text-sm text-zinc-800">{shop?.description}</p>
               </div>
             </section>
-            <section className="bg-white rounded-lg p-6 flex-1">
+
+            {/* right section - top products */}
+            <section className="rounded-lg flex-1">
               <h1 className="text-xl font-bold mb-4">
                 Top picks from {shop?.name}
               </h1>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {products?.map((product: IProduct) => (
                   <ProductCard key={product?.id} product={product} />
                 ))}
