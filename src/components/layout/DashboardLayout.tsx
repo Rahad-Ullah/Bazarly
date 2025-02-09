@@ -1,11 +1,8 @@
 import {
   Bell,
-  Dumbbell,
   Home,
   Menu,
   Search,
-  Ticket,
-  Users,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -194,64 +191,66 @@ const DashboardLayout = () => {
                     <Home className="size-5" />
                     Dashboard
                   </NavLink>
-                  {user?.role === "user" && (
-                    <NavLink
-                      to="/dashboard/my-bookings"
-                      className={({ isActive, isPending }) =>
-                        isPending
-                          ? "pending"
-                          : isActive
-                          ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                          : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                      }
-                    >
-                      <Ticket className="size-5" />
-                      My Bookings
-                    </NavLink>
-                  )}
-                  {user?.role === "admin" && (
-                    <div className="flex flex-col gap-2">
-                      <NavLink
-                        to="/dashboard/bookings"
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                        }
-                      >
-                        <Ticket className="size-5" />
-                        Bookings{" "}
-                      </NavLink>
-                      <NavLink
-                        to="/dashboard/facilities"
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                        }
-                      >
-                        <Dumbbell className="size-5" />
-                        Facilities{" "}
-                      </NavLink>
-                      <NavLink
-                        to="/dashboard/add-admin"
-                        className={({ isActive, isPending }) =>
-                          isPending
-                            ? "pending"
-                            : isActive
-                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-muted text-primary transition-all hover:text-primary"
-                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary"
-                        }
-                      >
-                        <Users className="size-5" />
-                        Add Admin
-                      </NavLink>
-                    </div>
-                  )}
+                  {/* menus for customer */}
+                  <div className="flex flex-col gap-2">
+                    {user?.role === userRole.CUSTOMER &&
+                      CustomerSidebarMenus.map((item, idx) => (
+                        <NavLink
+                          to={item.path}
+                          key={idx}
+                          className={({ isActive, isPending }) =>
+                            isPending
+                              ? "pending"
+                              : isActive
+                              ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-primary text-white transition-all"
+                              : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+                          }
+                        >
+                          {item.icon}
+                          {item.title}
+                        </NavLink>
+                      ))}
+                  </div>
+                  {/* menus for admin */}
+                  <div className="flex flex-col gap-2">
+                    {user?.role === userRole.ADMIN &&
+                      AdminSidebarMenus.map((item, idx) => (
+                        <NavLink
+                          to={item.path}
+                          key={idx}
+                          className={({ isActive, isPending }) =>
+                            isPending
+                              ? "pending"
+                              : isActive
+                              ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-primary text-white transition-all"
+                              : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+                          }
+                        >
+                          {item.icon}
+                          {item.title}
+                        </NavLink>
+                      ))}
+                  </div>
+                  {/* menus for vendor */}
+                  <div className="flex flex-col gap-2">
+                    {user?.role === userRole.VENDOR &&
+                      VendorSidebarMenus.map((item, idx) => (
+                        <NavLink
+                          to={item.path}
+                          key={idx}
+                          className={({ isActive, isPending }) =>
+                            isPending
+                              ? "pending"
+                              : isActive
+                              ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-primary text-white transition-all"
+                              : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+                          }
+                        >
+                          {item.icon}
+                          {item.title}
+                        </NavLink>
+                      ))}
+                  </div>
                 </nav>
               </SheetContent>
             </Sheet>
