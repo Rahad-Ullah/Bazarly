@@ -170,7 +170,7 @@ const MyOrders = () => {
                       </TableRow>
                     ))}
               </TableBody>
-              {orders?.length < 1 && (
+              {!orders?.length && (
                 <TableCaption>
                   {/* show no data found message if bookings is empty */}
                   <div className="text-center w-full mt-14">
