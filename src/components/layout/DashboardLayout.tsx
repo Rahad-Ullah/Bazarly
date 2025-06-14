@@ -29,6 +29,7 @@ import userRole from "@/constants/userRole";
 import {
   AdminSidebarMenus,
   CustomerSidebarMenus,
+  SuperAdminSidebarMenus,
   VendorSidebarMenus,
 } from "./SidebarMenus/SidebarMenus";
 
@@ -70,10 +71,11 @@ const DashboardLayout = () => {
                   <Home className="size-5" />
                   Dashboard
                 </NavLink>
-                {/* menus for customer */}
+
+                {/* menus for super admin */}
                 <div className="flex flex-col gap-2">
-                  {user?.role === userRole.CUSTOMER &&
-                    CustomerSidebarMenus.map((item, idx) => (
+                  {user?.role === userRole.SUPER_ADMIN &&
+                    SuperAdminSidebarMenus.map((item, idx) => (
                       <NavLink
                         to={item.path}
                         key={idx}
@@ -90,6 +92,7 @@ const DashboardLayout = () => {
                       </NavLink>
                     ))}
                 </div>
+
                 {/* menus for admin */}
                 <div className="flex flex-col gap-2">
                   {user?.role === userRole.ADMIN &&
@@ -110,6 +113,28 @@ const DashboardLayout = () => {
                       </NavLink>
                     ))}
                 </div>
+
+                {/* menus for customer */}
+                <div className="flex flex-col gap-2">
+                  {user?.role === userRole.CUSTOMER &&
+                    CustomerSidebarMenus.map((item, idx) => (
+                      <NavLink
+                        to={item.path}
+                        key={idx}
+                        className={({ isActive, isPending }) =>
+                          isPending
+                            ? "pending"
+                            : isActive
+                            ? "flex items-center gap-3 rounded-lg px-3 py-2 bg-primary text-white transition-all"
+                            : "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:bg-muted hover:text-primary"
+                        }
+                      >
+                        {item.icon}
+                        {item.title}
+                      </NavLink>
+                    ))}
+                </div>
+
                 {/* menus for vendor */}
                 <div className="flex flex-col gap-2">
                   {user?.role === userRole.VENDOR &&

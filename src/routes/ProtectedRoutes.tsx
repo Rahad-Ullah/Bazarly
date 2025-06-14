@@ -5,10 +5,10 @@ import { Navigate, useLocation } from "react-router-dom";
 
 type TProtectedRoutesProps = {
   children: ReactNode;
-  role: string;
+  roles: string[];
 };
 
-const ProtectedRoutes = ({ children, role }: TProtectedRoutesProps) => {
+const ProtectedRoutes = ({ children, roles }: TProtectedRoutesProps) => {
   const user = useAppSelector(selectCurrentUser);
   const location = useLocation();
 
@@ -16,7 +16,7 @@ const ProtectedRoutes = ({ children, role }: TProtectedRoutesProps) => {
     return <Navigate state={location.pathname} to={"/login"}></Navigate>;
   }
 
-  if (user?.role === role) {
+  if (user?.role && roles.includes(user.role)) {
     return children;
   }
 

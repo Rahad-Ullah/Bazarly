@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path: "/recent-products",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <Recent />
           </ProtectedRoutes>
         ),
@@ -72,7 +72,7 @@ const router = createBrowserRouter([
       {
         path: "/shops/:id",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <Shop />
           </ProtectedRoutes>
         ),
@@ -88,7 +88,7 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <Checkout />
           </ProtectedRoutes>
         ),
@@ -96,7 +96,7 @@ const router = createBrowserRouter([
       {
         path: "/payment/success",
         element: (
-          <ProtectedRoutes role="CUSTOMER">
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <PaymentSuccess />
           </ProtectedRoutes>
         ),
@@ -104,7 +104,7 @@ const router = createBrowserRouter([
       {
         path: "/payment/failed",
         element: (
-          <ProtectedRoutes role="CUSTOMER">
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <PaymentFail />
           </ProtectedRoutes>
         ),
@@ -154,7 +154,7 @@ const router = createBrowserRouter([
       {
         path: "my-orders",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <MyOrders />
           </ProtectedRoutes>
         ),
@@ -162,7 +162,7 @@ const router = createBrowserRouter([
       {
         path: "recent-viewed",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <RecentViewed />
           </ProtectedRoutes>
         ),
@@ -170,7 +170,7 @@ const router = createBrowserRouter([
       {
         path: "my-followed-shops",
         element: (
-          <ProtectedRoutes role={userRole.CUSTOMER}>
+          <ProtectedRoutes roles={[userRole.CUSTOMER]}>
             <FollowedShops />
           </ProtectedRoutes>
         ),
@@ -178,7 +178,7 @@ const router = createBrowserRouter([
       {
         path: "my-shops",
         element: (
-          <ProtectedRoutes role={userRole.VENDOR}>
+          <ProtectedRoutes roles={[userRole.VENDOR]}>
             <MyShops />
           </ProtectedRoutes>
         ),
@@ -186,7 +186,7 @@ const router = createBrowserRouter([
       {
         path: "shop-products",
         element: (
-          <ProtectedRoutes role={userRole.VENDOR}>
+          <ProtectedRoutes roles={[userRole.VENDOR]}>
             <MyProducts />
           </ProtectedRoutes>
         ),
@@ -194,7 +194,7 @@ const router = createBrowserRouter([
       {
         path: "shop-reviews",
         element: (
-          <ProtectedRoutes role={userRole.VENDOR}>
+          <ProtectedRoutes roles={[userRole.VENDOR]}>
             <ShopReviews />
           </ProtectedRoutes>
         ),
@@ -202,7 +202,7 @@ const router = createBrowserRouter([
       {
         path: "orders",
         element: (
-          <ProtectedRoutes role={userRole.VENDOR}>
+          <ProtectedRoutes roles={[userRole.VENDOR]}>
             <ShopOrders />
           </ProtectedRoutes>
         ),
@@ -210,7 +210,7 @@ const router = createBrowserRouter([
       {
         path: "shop-followers",
         element: (
-          <ProtectedRoutes role={userRole.VENDOR}>
+          <ProtectedRoutes roles={[userRole.VENDOR]}>
             <ShopFollowers />
           </ProtectedRoutes>
         ),
@@ -218,7 +218,7 @@ const router = createBrowserRouter([
       {
         path: "customers",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Customers />
           </ProtectedRoutes>
         ),
@@ -226,7 +226,7 @@ const router = createBrowserRouter([
       {
         path: "vendors",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Vendors />
           </ProtectedRoutes>
         ),
@@ -234,7 +234,7 @@ const router = createBrowserRouter([
       {
         path: "shops",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Shops />
           </ProtectedRoutes>
         ),
@@ -242,7 +242,7 @@ const router = createBrowserRouter([
       {
         path: "categories",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Categories />
           </ProtectedRoutes>
         ),
@@ -250,7 +250,7 @@ const router = createBrowserRouter([
       {
         path: "coupons",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Coupons />
           </ProtectedRoutes>
         ),
@@ -258,7 +258,7 @@ const router = createBrowserRouter([
       {
         path: "newsletters",
         element: (
-          <ProtectedRoutes role={userRole.ADMIN}>
+          <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Newsletters />
           </ProtectedRoutes>
         ),

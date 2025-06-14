@@ -2,6 +2,7 @@ import {
   History,
   Mails,
   Receipt,
+  Shield,
   ShoppingCart,
   Star,
   Store,
@@ -10,6 +11,44 @@ import {
   Users,
   UsersRound,
 } from "lucide-react";
+
+export const SuperAdminSidebarMenus = [
+  {
+    title: "Customers",
+    path: "/dashboard/customers",
+    icon: <UsersRound size={20} />,
+  },
+  {
+    title: "Vendors",
+    path: "/dashboard/vendors",
+    icon: <Users size={20} />,
+  },
+  {
+    title: "Admins",
+    path: "/dashboard/admins",
+    icon: <Shield size={20} />,
+  },
+  {
+    title: "Shops",
+    path: "/dashboard/shops",
+    icon: <Store size={20} />,
+  },
+  {
+    title: "Categories",
+    path: "/dashboard/categories",
+    icon: <Tags size={20} />,
+  },
+  {
+    title: "Coupons",
+    path: "/dashboard/coupons",
+    icon: <Ticket size={20} />,
+  },
+  {
+    title: "Newsletters",
+    path: "/dashboard/newsletters",
+    icon: <Mails size={20} />,
+  },
+];
 
 export const AdminSidebarMenus = [
   {
