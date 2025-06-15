@@ -71,7 +71,16 @@ export interface ICustomerQueryParams
   sortOrder?: string;
 }
 
-export interface IVendorQueryParams
+export interface IAdminQueryParams
+  extends Record<string, string | number | undefined> {
+  searchTerm?: string;
+  page?: number;
+  limit?: number;
+  sortBy?: string;
+  sortOrder?: string;
+}
+
+export interface IAdminQueryParams
   extends Record<string, string | number | undefined> {
   searchTerm?: string;
   page?: number;

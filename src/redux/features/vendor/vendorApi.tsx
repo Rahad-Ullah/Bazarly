@@ -1,6 +1,6 @@
 import generateQueryString from "@/utils/generateQueryString";
 import { baseApi } from "../../api/baseApi";
-import { IVendorQueryParams } from "@/interfaces/queryParams";
+import { IAdminQueryParams } from "@/interfaces/queryParams";
 
 const vendorApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -22,7 +22,7 @@ const vendorApi = baseApi.injectEndpoints({
       invalidatesTags: ["Vendors"],
     }),
     getAllVendors: builder.query({
-      query: (query: IVendorQueryParams) => ({
+      query: (query: IAdminQueryParams) => ({
         url: `/vendors/?${generateQueryString(query)}`,
         method: "GET",
       }),

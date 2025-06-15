@@ -38,6 +38,7 @@ import Categories from "@/pages/Dashboard/Admin/Categories/Categories";
 import Coupons from "@/pages/Dashboard/Admin/Coupons/Coupons";
 import Newsletters from "@/pages/Dashboard/Admin/Newsletters/Newsletters";
 import ShopFollowers from "@/pages/Dashboard/Vendor/ShopFollowers/ShopFollowers";
+import AdminsPage from "@/pages/Dashboard/Admin/Admins/Admins";
 
 const router = createBrowserRouter([
   {
@@ -228,6 +229,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoutes roles={[userRole.ADMIN, userRole.SUPER_ADMIN]}>
             <Vendors />
+          </ProtectedRoutes>
+        ),
+      },
+      {
+        path: "admins",
+        element: (
+          <ProtectedRoutes roles={[userRole.SUPER_ADMIN]}>
+            <AdminsPage />
           </ProtectedRoutes>
         ),
       },
