@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import { useState } from "react";
 import CustomPagination from "@/components/shared/Pagination";
 import { useChangeUserStatusMutation } from "@/redux/features/user/userApi";
@@ -38,12 +38,14 @@ import {
   useGetAllAdminsQuery,
 } from "@/redux/features/admin/adminApi";
 import { TAdmin } from "@/types/TAdmin";
+import Modal from "@/components/ui/modal";
+import AddAdminForm from "@/components/form/admin/AddAdmin";
 
 const AdminsPage = () => {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
-  // get vendors data
+  // get users data
   const { data, isFetching } = useGetAllAdminsQuery({
     searchTerm: search,
     page,
@@ -97,13 +99,24 @@ const AdminsPage = () => {
             <CardDescription>
               Manage admins and view their details.
             </CardDescription>
-            <div className="pt-6">
+            <div className="flex justify-between pt-6">
               <Input
                 onChange={(e) => setSearch(e.target.value)}
                 type="search"
                 placeholder="Search by name, email or phone"
                 className="max-w-sm"
               />
+              <Modal
+                dialogTrigger={
+                  <Button>
+                    <Plus size={16} />
+                    Add Admin
+                  </Button>
+                }
+                dialogTitle="Add Admin"
+              >
+                <AddAdminForm />
+              </Modal>
             </div>
           </CardHeader>
           <CardContent>
@@ -229,7 +242,7 @@ const AdminsPage = () => {
             </Table>
           </CardContent>
           {/* showing range of pagination */}
-          {admins?.length < 1 && (
+          {admins?.length > 0 && (
             <CardFooter>
               <CustomPagination
                 pages={pages}
