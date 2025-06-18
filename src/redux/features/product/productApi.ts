@@ -6,7 +6,7 @@ import { IProduct } from "@/types/TProduct";
 const productApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createProduct: builder.mutation({
-      query: (payload) => {
+      query: ({payload}) => {
         return {
           url: `/products/create`,
           method: "POST",

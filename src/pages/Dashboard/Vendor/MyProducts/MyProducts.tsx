@@ -25,7 +25,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { MoreHorizontal } from "lucide-react";
+import { MoreHorizontal, Plus } from "lucide-react";
 import { useState } from "react";
 import CustomPagination from "@/components/shared/Pagination";
 import { toast } from "sonner";
@@ -40,14 +40,19 @@ import { useAppSelector } from "@/redux/hook";
 import { selectCurrentUser } from "@/redux/features/auth/AuthSlice";
 import { IProduct } from "@/types/TProduct";
 import { EditProductDialogue } from "./EditProduct";
+import { Input } from "@/components/ui/input";
+import Modal from "@/components/ui/modal";
+import AddProductForm from "@/components/form/product/AddProduct";
 
 const MyProducts = () => {
+  const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
 
   const user = useAppSelector(selectCurrentUser);
 
   //   get products data
   const { data, isFetching } = useGetAllProductsQuery({
+    searchTerm,
     page,
     vendorEmail: user?.email,
   });
@@ -104,6 +109,25 @@ const MyProducts = () => {
             <CardDescription>
               Manage your products and view their details.
             </CardDescription>
+            <div className="flex justify-between pt-6">
+              <Input
+                onChange={(e) => setSearchTerm(e.target.value)}
+                type="search"
+                placeholder="Search by name"
+                className="max-w-sm"
+              />
+              <Modal
+                dialogTrigger={
+                  <Button>
+                    <Plus size={16} />
+                    Add Product
+                  </Button>
+                }
+                dialogTitle="Add Product"
+              >
+                <AddProductForm />
+              </Modal>
+            </div>
           </CardHeader>
           <CardContent>
             <Table>

@@ -19,7 +19,7 @@ const Modal = ({
       <DialogTrigger asChild>{dialogTrigger}</DialogTrigger>
       <DialogContent
         className={`
-          ${className} rounded-xl`}
+          ${className} rounded-xl max-h-[90vh] overflow-y-scroll`}
       >
         <DialogHeader>
           <DialogTitle className="text-xl font-semibold">
