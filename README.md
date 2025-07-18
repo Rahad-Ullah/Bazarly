@@ -1,4 +1,4 @@
-# Bazarly
+# Bazarly - Multi Vendor E-commerce Platform
 
 ## Introduction
 
